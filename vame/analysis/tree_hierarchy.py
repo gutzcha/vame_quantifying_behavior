@@ -14,6 +14,8 @@ import numpy as np
 import networkx as nx
 import random
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use("Qt5Agg")
 
 def hierarchy_pos(G, root=None, width=.5, vert_gap = 0.2, vert_loc = 0, xcenter = 0.5):
 
@@ -52,25 +54,31 @@ def hierarchy_pos(G, root=None, width=.5, vert_gap = 0.2, vert_loc = 0, xcenter 
 
 
 def merge_func(transition_matrix, n_cluster, motif_norm, merge_sel):
-    
+    # merge_nodes = (np.array([], dtype=int), np.array([], dtype=int))  # Initialize with integer type arrays
     if merge_sel == 0:
         # merge nodes with highest transition probability
         cost = np.max(transition_matrix)
         merge_nodes = np.where(cost == transition_matrix)
-        
+    merge_nodes = None
     if merge_sel == 1:
             
         cost_temp = 100
         for i in range(n_cluster):
             for j in range(n_cluster):
                 try:
-                    cost = (motif_norm[i] + motif_norm[j]) / np.abs(transition_matrix[i,j] + transition_matrix[j,i] )
+                    cost = (motif_norm[i] + motif_norm[j]) / np.abs(transition_matrix[i,j] + transition_matrix[j,i] + 1e-5)
                 except ZeroDivisionError:
                     print("Error: Transition probabilities between motif "+str(i)+" and motif "+str(j)+ " are zero.")
+                except Exception as e:
+                    print("An unexpected error occurred: " + str(e))
                 if cost <= cost_temp:
                     cost_temp = cost
                     merge_nodes = (np.array([i]), np.array([j]))                
-            
+        if merge_nodes is None:
+            # merge nodes with highest transition probability
+            cost = np.max(transition_matrix)
+            merge_nodes = np.where(cost == transition_matrix)
+
     return merge_nodes
 
 

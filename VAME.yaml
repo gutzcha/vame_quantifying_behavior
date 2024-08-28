@@ -6,12 +6,14 @@ name: VAME
 channels:
   - pytorch
   - defaults
+  - conda-forge
 dependencies:
   - python=3.7
   - pip
   - torchvision
   - jupyter
   - nb_conda
+  - umap-learn
   - pip:
     - pytest-shutil
     - scipy
@@ -20,11 +22,10 @@ dependencies:
     - pathlib
     - pandas
     - ruamel.yaml
-    - sklearn
+    - scikit-learn  
     - pyyaml
     - opencv-python-headless
     - h5py
-    - umap-learn
     - networkx    
     - tqdm
     - hmmlearn

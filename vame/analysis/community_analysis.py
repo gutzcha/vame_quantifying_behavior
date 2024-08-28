@@ -75,15 +75,28 @@ def compute_transition_matrices(files, labels, n_cluster):
         adj, trans, mat = get_adjacency_matrix(labels[i], n_cluster)
         transition_matrices.append(trans)    
     return transition_matrices
-    
 
+
+def get_complete_usage(labels, n_cluster):
+    # Initialize a complete usage array with zeros
+    complete_usage = np.zeros(n_cluster, dtype=int)
+
+    # Count occurrences of each label in the current file
+    unique_labels, counts = np.unique(labels, return_counts=True)
+
+    # Fill in the counts for the existing labels
+    complete_usage[unique_labels] = counts
+
+    return complete_usage
 def create_community_bag(files, labels, transition_matrices, cut_tree, n_cluster):
     # markov chain to tree -> community detection
     trees = []
     communities_all = []
     for i, file in enumerate(files):
-        _, usage = np.unique(labels[i], return_counts=True)
-        T = graph_to_tree(usage, transition_matrices[i], n_cluster, merge_sel=1) 
+        # _, usage = np.unique(labels[i], return_counts=True)
+        usage = get_complete_usage(labels[i], n_cluster)
+        T = graph_to_tree(usage, transition_matrices[i], n_cluster, merge_sel=1)
+
         trees.append(T)
         
         if cut_tree != None:

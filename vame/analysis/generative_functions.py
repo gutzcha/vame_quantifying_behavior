@@ -120,7 +120,7 @@ def load_model(cfg, model_name):
     FUTURE_STEPS = cfg['prediction_steps']
     
     NUM_FEATURES = cfg['num_features']
-    NUM_FEATURES = NUM_FEATURES - 2
+    # NUM_FEATURES = NUM_FEATURES - 2
     
     hidden_size_layer_1 = cfg['hidden_size_layer_1']
     hidden_size_layer_2 = cfg['hidden_size_layer_2']

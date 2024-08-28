@@ -252,9 +252,13 @@ def play_aligned_video(a, n, frame_count):
 
 
 def alignment(path_to_file, filename, pose_ref_index, video_format, crop_size, confidence, use_video=False, check_video=False):
-    
+
     #read out data
     dataFile = glob.glob(os.path.join(path_to_file,'videos','pose_estimation',filename+'*'))
+
+    #debug
+    print(f'dataFile: \n{dataFile}')
+
     if len(dataFile)>1:
         raise AssertionError("Multiple data files match video {}".format(filename))
     else:

@@ -28,12 +28,14 @@ def get_cluster_vid(cfg, path_to_file, file, n_cluster, videoType, flag):
     capture = cv.VideoCapture(os.path.join(cfg['project_path'],"videos",file+videoType))
 
     if capture.isOpened():
-        width  = capture.get(cv.CAP_PROP_FRAME_WIDTH)
+        width = capture.get(cv.CAP_PROP_FRAME_WIDTH)
         height = capture.get(cv.CAP_PROP_FRAME_HEIGHT)
 #        print('width, height:', width, height)
 
-        fps = 25#capture.get(cv.CAP_PROP_FPS)
-#        print('fps:', fps)
+        fps = capture.get(cv.CAP_PROP_FPS)
+    else:
+        fps = 25
+    print('fps:', fps)
 
     cluster_start = cfg['time_window'] / 2
     for cluster in range(n_cluster):

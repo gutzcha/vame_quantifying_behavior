@@ -15,17 +15,18 @@ setup(
     url="https://https://github.com/LINCellularNeuroscience/VAME/",
     setup_requires=[
         "pytest",
-    ],	
+    ],
     install_requires=[
         "pytest-shutil",
         "scipy",
         "numpy",
         "matplotlib",
         "pathlib",
-	"pandas",
+        "pandas",
         "ruamel.yaml",
-	"sklearn",
+        "scikit-learn",
         "pyyaml",
         "opencv-python",
+        "umap-learn"
     ],
 )
