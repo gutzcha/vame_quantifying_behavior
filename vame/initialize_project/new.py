@@ -22,7 +22,7 @@ import os
 from pathlib import Path
 import shutil
 
-def init_new_project(project, videos, working_directory=None, videotype='.mp4'):
+def init_new_project(project, videos, working_directory=None, videotype='.mp4', num_features=12):
     from datetime import datetime as dt
     from vame.util import auxiliary
     date = dt.today()
@@ -119,7 +119,7 @@ def init_new_project(project, videos, working_directory=None, videotype='.mp4'):
     cfg_file['prediction_steps']=15
     cfg_file['model_convergence']=50
     cfg_file['model_snapshot']=50
-    cfg_file['num_features']=12
+    cfg_file['num_features']=num_features
     cfg_file['savgol_filter']=True
     cfg_file['savgol_length']=5
     cfg_file['savgol_order']=2

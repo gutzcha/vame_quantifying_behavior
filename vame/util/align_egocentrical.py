@@ -252,7 +252,7 @@ def play_aligned_video(a, n, frame_count):
 
 
 def alignment(path_to_file, filename, pose_ref_index, video_format, crop_size, confidence, use_video=False, check_video=False):
-
+    print("I am here")
     #read out data
     dataFile = glob.glob(os.path.join(path_to_file,'videos','pose_estimation',filename+'*'))
 
@@ -311,6 +311,9 @@ def alignment(path_to_file, filename, pose_ref_index, video_format, crop_size, c
 def egocentric_alignment(config, pose_ref_index=[0,5], crop_size=(300,300), use_video=False, video_format='.mp4', check_video=False):
     """ Happy aligning """
     #config parameters
+
+    # debug
+    print(f"I am here: {os.path.basename(__file__)}")
     config_file = Path(config).resolve()
     cfg = read_config(config_file)
     
@@ -324,6 +327,10 @@ def egocentric_alignment(config, pose_ref_index=[0,5], crop_size=(300,300), use_
         raise ValueError("The config.yaml indicates that the data is not egocentric. Please check the parameter egocentric_data")
     
     # call function and save into your VAME data folder
+
+    # debug
+    print(f'Here are the files: {filename}')
+
     for file in filename:
         print("Aligning data %s, Pose confidence value: %.2f" %(file, confidence))
         egocentric_time_series, frames = alignment(path_to_file, file, pose_ref_index, video_format, crop_size, 
